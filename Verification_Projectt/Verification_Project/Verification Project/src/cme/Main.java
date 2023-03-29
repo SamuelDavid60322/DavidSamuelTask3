@@ -28,6 +28,7 @@ public class Main {
         Rate rate = new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
 
     }
+
     @Test
     public void testConstructorWithValidInput() {
         BigDecimal hourlyNormalRate = new BigDecimal("7.0");
@@ -57,6 +58,7 @@ public class Main {
             Rate rate = new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
         });
     }
+
     @Test
     public void testConstructorWithNullParameters() {
         BigDecimal hourlyNormalRate = null;
@@ -77,7 +79,7 @@ public class Main {
         CarParkKind kind = CarParkKind.STUDENT;
         ArrayList<Period> reduced = new ArrayList<>();
         reduced.add(new Period(5, 7));
-        ArrayList<Period> normal  = null;
+        ArrayList<Period> normal = null;
 
         assertThrows(IllegalArgumentException.class, () -> {
             new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
@@ -179,7 +181,7 @@ public class Main {
 
     @Test
     public void testConstructorWithNegativeNumberInReducedRate() {
-        BigDecimal hourlyNormalRate = new BigDecimal("-7.0");
+        BigDecimal hourlyNormalRate = new BigDecimal("7.0");
         BigDecimal hourlyReducedRate = new BigDecimal("-1.0");
         CarParkKind kind = CarParkKind.STUDENT;
         ArrayList<Period> periods = new ArrayList<>();
@@ -223,6 +225,55 @@ public class Main {
             Rate rate = new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
         });
     }
+
+    @Test
+    public void testConstructorWithNullReducedRate() {
+        BigDecimal hourlyNormalRate = BigDecimal.valueOf(10);
+        BigDecimal hourlyReducedRate = null;
+        CarParkKind kind = CarParkKind.STUDENT;
+        ArrayList<Period> reduced = new ArrayList<>();
+        reduced.add(new Period(0, 4));
+        ArrayList<Period> normal = new ArrayList<>();
+        normal.add(new Period(4, 24));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Rate rate = new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
+        }, "The rates cannot be null");
+    }
+
+
+    @Test
+    public void testConstructorWithEmptyReducedPeriods() {
+        BigDecimal hourlyNormalRate = new BigDecimal("7.0");
+        BigDecimal hourlyReducedRate = new BigDecimal("1.0");
+        CarParkKind kind = CarParkKind.STUDENT;
+        ArrayList<Period> normal = new ArrayList<>();
+        ArrayList<Period> reduced = null;
+        normal.add(new Period(4, 24));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Rate rate = new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
+        }, "The periods are not valid individually");
+    }
+
+    @Test
+    public void testConstructorWithInvalidPeriodsMidway() {
+        BigDecimal hourlyNormalRate = BigDecimal.valueOf(10);
+        BigDecimal hourlyReducedRate = BigDecimal.valueOf(5);
+        CarParkKind kind = CarParkKind.VISITOR;
+        ArrayList<Period> reduced = new ArrayList<>();
+        reduced.add(new Period(1, 4));
+        ArrayList<Period> normal = new ArrayList<>();
+        normal.add(new Period(4, 6));
+        normal.add(new Period(5, 8));
+        normal.add(new Period(8, 10));
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Rate rate = new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
+        });
+    }
+
+
 
 
 }
