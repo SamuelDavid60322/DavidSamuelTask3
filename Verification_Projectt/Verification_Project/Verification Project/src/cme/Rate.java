@@ -108,6 +108,10 @@ public class Rate {
    total = reduction.reductionFee(total).setScale(2);
    total = reduction.reductionFee(total).setScale(2);
   }
+  if (kind == STAFF){
+   reduction = new StudentRate();
+   total = reduction.reductionFee(total).setScale(2);
+  }
   return total;
  }
 

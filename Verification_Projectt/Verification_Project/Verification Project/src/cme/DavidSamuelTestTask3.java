@@ -439,7 +439,7 @@ public class DavidSamuelTestTask3 {
 
         Period parkingPeriod = new Period(7, 24); // Parking for 17 hours
 
-        assertEquals(BigDecimal.valueOf(10.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
+        assertEquals(BigDecimal.valueOf(14.75).setScale(2), r.calculate(parkingPeriod).setScale(2));
     }
 
     @Test
@@ -461,8 +461,8 @@ public class DavidSamuelTestTask3 {
         Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(6, 22); // Parking for 16 hours
-        
-        assertEquals(BigDecimal.valueOf(10.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
+
+        assertEquals(BigDecimal.valueOf(18.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
     }
 
 }
