@@ -276,7 +276,30 @@ public class DavidSamuelTestTask3 {
     }
 
     //TDD PROCESS TESTS
-    
+
+    @Test
+    public void visitorFirstTenFree() {
+        CarParkKind carParkKind = CarParkKind.VISITOR;
+
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList<Period> normalPeriods = new ArrayList<>();
+        ArrayList<Period> reducedPeriods = new ArrayList<>();
+
+        Period normalPeriod1 = new Period(1, 18);
+        Period reducedPeriod1 = new Period(20, 22);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate rate = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1, 6); // Parking for 10 hours
+
+        assertEquals(BigDecimal.valueOf(0), rate.calculate(parkingPeriod)); // Expected cost = 0€ (because total cost is at 10€ which is free)
+    }
+
 
 
 
