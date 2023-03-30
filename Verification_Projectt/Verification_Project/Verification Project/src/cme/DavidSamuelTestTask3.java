@@ -419,4 +419,50 @@ public class DavidSamuelTestTask3 {
         assertEquals(BigDecimal.valueOf(8.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
     }
 
+    @Test
+    public void staffMaximumPayable1() {
+        CarParkKind carParkKind = CarParkKind.STAFF;
+
+        BigDecimal normalRate = new BigDecimal(2.5);
+        BigDecimal reducedRate = new BigDecimal(1.5);
+
+        ArrayList<Period> normalPeriods = new ArrayList<>();
+        ArrayList<Period> reducedPeriods = new ArrayList<>();
+
+        Period normalPeriod1 = new Period(7, 19);
+        Period reducedPeriod1 = new Period(19, 24);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(7, 24); // Parking for 17 hours
+
+        assertEquals(BigDecimal.valueOf(10.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
+    }
+
+    @Test
+    public void staffMaximumPayablePerDayWithDifferentRates() {
+        CarParkKind carParkKind = CarParkKind.STAFF;
+
+        BigDecimal normalRate = new BigDecimal(3);
+        BigDecimal reducedRate = new BigDecimal(2);
+
+        ArrayList<Period> normalPeriods = new ArrayList<>();
+        ArrayList<Period> reducedPeriods = new ArrayList<>();
+
+        Period normalPeriod1 = new Period(6, 18);
+        Period reducedPeriod1 = new Period(18, 24);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(6, 22); // Parking for 16 hours
+        
+        assertEquals(BigDecimal.valueOf(10.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
+    }
+
 }
