@@ -10,6 +10,7 @@ public class Rate {
  private BigDecimal hourlyReducedRate;
  private ArrayList<Period> reduced = new ArrayList<>();
  private ArrayList<Period> normal = new ArrayList<>();
+ ICarParkKind reduction;
 
  public Rate(BigDecimal normalRate, BigDecimal reducedRate, CarParkKind kind, ArrayList<Period> reducedPeriods
          , ArrayList<Period> normalPeriods) {
@@ -91,8 +92,17 @@ public class Rate {
  public BigDecimal calculate(Period periodStay) {
   int normalRateHours = periodStay.occurences(normal);
   int reducedRateHours = periodStay.occurences(reduced);
-  return (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
+  BigDecimal total =  (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
           this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
+
+  switch (this.kind) {
+   case VISITOR:
+    reduction = new VisitorRate();
+    total = reduction.reductionFee(total).setScale(2);
+    break;
+  }
+
+  return total;
  }
 
 }

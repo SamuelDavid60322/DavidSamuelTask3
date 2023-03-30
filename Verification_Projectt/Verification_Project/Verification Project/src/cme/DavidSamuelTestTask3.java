@@ -297,7 +297,7 @@ public class DavidSamuelTestTask3 {
 
         Period parkingPeriod = new Period(1, 6); // Parking for 5 hours
 
-        assertEquals(BigDecimal.valueOf(0), rate.calculate(parkingPeriod)); // Expected cost = 0€ (because total cost is at 10€ which is free)
+        assertEquals(BigDecimal.valueOf(0).setScale(2), rate.calculate(parkingPeriod)); // Expected cost = 0€ (because total cost is at 10€ which is free)
     }
 
     @Test
@@ -324,7 +324,7 @@ public class DavidSamuelTestTask3 {
         // Free amount = 10€
         // Remaining amount after free: 16€ - 10€ = 6€
         // 50% reduction on remaining amount: 6€ * 0.5 = 3€
-        assertEquals(BigDecimal.valueOf(3), rate.calculate(parkingPeriod)); // Expected cost = 3€
+        assertEquals(BigDecimal.valueOf(3).setScale(2), rate.calculate(parkingPeriod)); // Expected cost = 3€
     }
 
 
