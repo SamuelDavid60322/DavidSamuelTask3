@@ -293,9 +293,9 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate rate = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
-        Period parkingPeriod = new Period(1, 6); // Parking for 5 hours
+        Period parkingPeriod = new Period(1, 5); // Parking for 5 hours
 
         assertEquals(BigDecimal.valueOf(0).setScale(2), rate.calculate(parkingPeriod)); // Expected cost = 0€ (because total cost is at 10€ which is free)
     }
@@ -316,15 +316,15 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate rate = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
-        Period parkingPeriod = new Period(1, 9); // Parking for 8 hours
+        Period parkingPeriod = new Period(1, 9); // Parking for 9 hours
 
-        // Total cost without reduction: (8 hours normal rate * 2€) = 16€
+        // Total cost without reduction: (8 hours normal rate * 2€) = 18€
         // Free amount = 10€
-        // Remaining amount after free: 16€ - 10€ = 6€
-        // 50% reduction on remaining amount: 6€ * 0.5 = 3€
-        assertEquals(BigDecimal.valueOf(3).setScale(2), rate.calculate(parkingPeriod)); // Expected cost = 3€
+        // Remaining amount after free: 18€ - 10€ = 8€
+        // 50% reduction on remaining amount: 8€ * 0.5 = 4€
+        assertEquals(BigDecimal.valueOf(4).setScale(2), rate.calculate(parkingPeriod)); // Expected cost = 4€
     }
 
 
