@@ -295,9 +295,36 @@ public class DavidSamuelTestTask3 {
 
         Rate rate = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
 
-        Period parkingPeriod = new Period(1, 6); // Parking for 10 hours
+        Period parkingPeriod = new Period(1, 6); // Parking for 5 hours
 
         assertEquals(BigDecimal.valueOf(0), rate.calculate(parkingPeriod)); // Expected cost = 0€ (because total cost is at 10€ which is free)
+    }
+
+    @Test
+    public void visitorFirstTenFreeAndReductionAbove() {
+        CarParkKind carParkKind = CarParkKind.VISITOR;
+
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList<Period> normalPeriods = new ArrayList<>();
+        ArrayList<Period> reducedPeriods = new ArrayList<>();
+
+        Period normalPeriod1 = new Period(1, 18);
+        Period reducedPeriod1 = new Period(20, 22);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate rate = new Rate(carParkKind, normalRate, reducedRate, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(1, 9); // Parking for 8 hours
+
+        // Total cost without reduction: (8 hours normal rate * 2€) = 16€
+        // Free amount = 10€
+        // Remaining amount after free: 16€ - 10€ = 6€
+        // 50% reduction on remaining amount: 6€ * 0.5 = 3€
+        assertEquals(BigDecimal.valueOf(3), rate.calculate(parkingPeriod)); // Expected cost = 3€
     }
 
 
