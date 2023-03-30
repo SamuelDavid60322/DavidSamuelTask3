@@ -1,11 +1,13 @@
 package cme;
 
 import org.junit.jupiter.api.Test;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Main {
+public class DavidSamuelTestTask3 {
 
     @Test
     public void testCarParkKind() {
@@ -274,7 +276,7 @@ public class Main {
     }
 
     //TDD PROCESS TESTS
-
+    
 
 
 
