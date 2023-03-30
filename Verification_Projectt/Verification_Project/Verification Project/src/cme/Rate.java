@@ -106,7 +106,6 @@ public class Rate {
   if (kind == MANAGEMENT){
    reduction = new ManagementRate();
    total = reduction.reductionFee(total).setScale(2);
-   total = reduction.reductionFee(total).setScale(2);
   }
   if (kind == STAFF){
    reduction = new StudentRate();

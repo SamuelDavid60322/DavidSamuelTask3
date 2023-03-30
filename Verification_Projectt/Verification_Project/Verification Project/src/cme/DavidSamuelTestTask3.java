@@ -143,7 +143,7 @@ public class DavidSamuelTestTask3 {
 
         Rate rate = new Rate(hourlyNormalRate, hourlyReducedRate, kind, reduced, normal);
 
-        BigDecimal expectedRate = new BigDecimal("60.0");
+        BigDecimal expectedRate = new BigDecimal("26.00");
         Period periodStay = new Period(1, 9);
         BigDecimal actualRate = rate.calculate(periodStay);
         assertEquals(expectedRate, actualRate);
@@ -343,11 +343,11 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(1, 3); // Parking for 2 hours
 
-        assertEquals(BigDecimal.valueOf(4), r.calculate(parkingPeriod));
+        assertEquals(BigDecimal.valueOf(5.0).setScale(2), rate.calculate(parkingPeriod));
     }
 
     @Test
@@ -366,11 +366,11 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(1, 4); // Parking for 3 hours
 
-        assertEquals(BigDecimal.valueOf(6), r.calculate(parkingPeriod));
+        assertEquals(BigDecimal.valueOf(5.00).setScale(2), rate.calculate(parkingPeriod));
     }
 
     @Test
@@ -389,11 +389,11 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(8, 14); // Parking for 6 hours
 
-        assertEquals(BigDecimal.valueOf(2.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
+        assertEquals(BigDecimal.valueOf(2.00).setScale(2), rate.calculate(parkingPeriod).setScale(2));
     }
 
     @Test
@@ -412,11 +412,11 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(10, 18); // Parking for 8 hours
 
-        assertEquals(BigDecimal.valueOf(8.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
+        assertEquals(BigDecimal.valueOf(8.00).setScale(2), rate.calculate(parkingPeriod).setScale(2));
     }
 
     @Test
@@ -435,11 +435,11 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(7, 24); // Parking for 17 hours
 
-        assertEquals(BigDecimal.valueOf(14.75).setScale(2), r.calculate(parkingPeriod).setScale(2));
+        assertEquals(BigDecimal.valueOf(14.75).setScale(2), rate.calculate(parkingPeriod).setScale(2));
     }
 
     @Test
@@ -458,11 +458,11 @@ public class DavidSamuelTestTask3 {
         normalPeriods.add(normalPeriod1);
         reducedPeriods.add(reducedPeriod1);
 
-        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+        Rate rate = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(6, 22); // Parking for 16 hours
 
-        assertEquals(BigDecimal.valueOf(18.00).setScale(2), r.calculate(parkingPeriod).setScale(2));
+        assertEquals(BigDecimal.valueOf(18.00).setScale(2), rate.calculate(parkingPeriod).setScale(2));
     }
 
 }
