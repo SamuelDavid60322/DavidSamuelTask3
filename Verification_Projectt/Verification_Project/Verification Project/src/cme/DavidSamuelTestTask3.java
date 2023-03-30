@@ -346,7 +346,7 @@ public class DavidSamuelTestTask3 {
         Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
 
         Period parkingPeriod = new Period(1, 3); // Parking for 2 hours
-        
+
         assertEquals(BigDecimal.valueOf(4), r.calculate(parkingPeriod));
     }
 
@@ -373,6 +373,50 @@ public class DavidSamuelTestTask3 {
         assertEquals(BigDecimal.valueOf(6), r.calculate(parkingPeriod));
     }
 
+    @Test
+    public void studentReductionAboveFiveFifty() {
+        CarParkKind carParkKind = CarParkKind.STUDENT;
 
+        BigDecimal normalRate = new BigDecimal(2);
+        BigDecimal reducedRate = new BigDecimal(1);
+
+        ArrayList<Period> normalPeriods = new ArrayList<>();
+        ArrayList<Period> reducedPeriods = new ArrayList<>();
+
+        Period normalPeriod1 = new Period(6, 18);
+        Period reducedPeriod1 = new Period(18, 24);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(8, 14); // Parking for 6 hours
+
+        assertEquals(BigDecimal.valueOf(12.84).setScale(2), r.calculate(parkingPeriod).setScale(2));
+    }
+
+    @Test
+    public void studentReductionAboveFiveFiftyDifferentHours() {
+        CarParkKind carParkKind = CarParkKind.STUDENT;
+
+        BigDecimal normalRate = new BigDecimal(3);
+        BigDecimal reducedRate = new BigDecimal(1.5);
+
+        ArrayList<Period> normalPeriods = new ArrayList<>();
+        ArrayList<Period> reducedPeriods = new ArrayList<>();
+
+        Period normalPeriod1 = new Period(7, 19);
+        Period reducedPeriod1 = new Period(19, 24);
+
+        normalPeriods.add(normalPeriod1);
+        reducedPeriods.add(reducedPeriod1);
+
+        Rate r = new Rate(normalRate, reducedRate, carParkKind, reducedPeriods, normalPeriods);
+
+        Period parkingPeriod = new Period(10, 18); // Parking for 8 hours
+
+        assertEquals(BigDecimal.valueOf(18.01).setScale(2), r.calculate(parkingPeriod).setScale(2));
+    }
 
 }

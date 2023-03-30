@@ -3,7 +3,7 @@ package cme;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
+import static cme.CarParkKind.*;
 public class Rate {
  private CarParkKind kind;
  private BigDecimal hourlyNormalRate;
@@ -95,13 +95,19 @@ public class Rate {
   BigDecimal total =  (this.hourlyNormalRate.multiply(BigDecimal.valueOf(normalRateHours))).add(
           this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
 
-  switch (this.kind) {
-   case VISITOR:
-    reduction = new VisitorRate();
-    total = reduction.reductionFee(total).setScale(2);
-    break;
+  if (kind == VISITOR){
+   reduction = new VisitorRate();
+   total = reduction.reductionFee(total).setScale(2);
   }
-
+  if (kind == STUDENT){
+   reduction = new StudentRate();
+   total = reduction.reductionFee(total).setScale(2);
+  }
+  if (kind == MANAGEMENT){
+   reduction = new ManagementRate();
+   total = reduction.reductionFee(total).setScale(2);
+   total = reduction.reductionFee(total).setScale(2);
+  }
   return total;
  }
 
